@@ -12,7 +12,7 @@ class Node{
 
 class BinarySearchTree{
 
-   Node root;
+   Node root = new Node(32);
    
    
    /*
@@ -50,18 +50,19 @@ class BinarySearchTree{
    in-order traversal
    */
    public void inOrderTraversal(Node root){
-      System.out.println(root);
+      
+      
       if (root.left != null) {
-      System.out.println(root.left);
+      System.out.print(root.left.value + ", ");
       }
       if (root.right != null) {
-      System.out.println(root.right);
+      System.out.print(root.right.value + ", ");
       }
       if (root.left != null) {
-      inOrderTraversal(root.left);
+         inOrderTraversal(root.left);
       }
       if (root.right != null) {
-      inOrderTraversal(root.right);
+         inOrderTraversal(root.right);
       }
    }
    
@@ -81,8 +82,8 @@ class BinarySearchTree{
    with a specific value
    */
    public boolean find(Node root, int key){
-      
-      return false;           
+      boolean found = false;
+      return found;           
    }
    
    
@@ -158,8 +159,8 @@ public class TreeDemo{
       t1.insert(t1.root,22);
       
 
-      
-      System.out.print("in-order :   ");
+      System.out.println(t1.root.value);
+      System.out.print("in-order :   " + t1.root.value + ", ");
       t1.inOrderTraversal(t1.root);
       System.out.println();
            
