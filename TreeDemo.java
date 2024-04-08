@@ -1,3 +1,8 @@
+
+
+import java.util.*;
+import java.io.*;
+
 class Node{
    int value;
    Node left, right;
@@ -52,7 +57,7 @@ class BinarySearchTree{
    public void inOrderTraversal(Node root){
       
       
-      if (root.left != null) {
+      if (root.left!= null) {
       System.out.print(root.left.value + ", ");
       }
       if (root.right != null) {
@@ -73,6 +78,62 @@ class BinarySearchTree{
    */
    public void postOrderTraversal(Node root){
       //implement me
+   
+
+        Stack<Node> stack = new Stack<Node>();
+        Stack<Integer> stackCtr = new Stack<Integer>();
+        ArrayList<Integer> orderList = new ArrayList<Integer>();
+
+        stack.push(root);
+        stackCtr.push(0);
+
+        while (!stack.empty())
+        {
+            int ctr = stackCtr.pop();
+            Node node = stack.peek();
+
+            if (ctr == 0)
+            {
+                // First visit.
+                stackCtr.push(1);
+
+                if (node.left != null)
+                {
+                    stack.push(node.left);
+                    stackCtr.push(0);
+                }
+            }
+            else if (ctr == 1)
+            {
+                // Second visit.
+                // Left subtree done.
+                stackCtr.push(2);
+
+                if (node.right != null)
+                {
+                    stack.push(node.right);
+                    stackCtr.push(0);
+                }
+            }
+            else // ctr >= 2
+            {
+                // Third visit.
+                // Right subtree done.
+                stack.pop();
+                orderList.add(node.value);
+            }
+        }
+
+        int[] order = new int[orderList.size()];
+        for (int i = 0; i < order.length; i++)
+        {
+            order[i] = orderList.get(i);
+        }
+        
+        for (int i =0; i < order.length; i++){
+            System.out.print(order[i] + ", ");
+        }
+        
    }
    
    
@@ -83,6 +144,9 @@ class BinarySearchTree{
    */
    public boolean find(Node root, int key){
       boolean found = false;
+      
+
+
       return found;           
    }
    
@@ -162,6 +226,8 @@ public class TreeDemo{
       System.out.println(t1.root.value);
       System.out.print("in-order :   " + t1.root.value + ", ");
       t1.inOrderTraversal(t1.root);
+      System.out.print("\npost-order : ");
+      t1.postOrderTraversal(t1.root);
       System.out.println();
            
       
