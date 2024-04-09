@@ -214,15 +214,22 @@ class BinarySearchTree{
    */
    public int getMax(Node root){
 	  int max = 0;
-      if (max < root.value) {
+      if (root.right == null) {
          max = root.value;
-         
+         return max;
       }
+      if (max > root.value) {
+         return max;
+
+      } else {
+         return getMax(root.right);
+      }
+      
+      
       //if (root.left);
       
 
-
-     return max;
+     
    }
    
    
@@ -281,10 +288,11 @@ public class TreeDemo{
       t1.inOrderTraversal(t1.root);
       System.out.print("\npost-order : ");
       t1.postOrderTraversal(t1.root);
-      System.out.print("\npre-order : ");
+      System.out.print("\npre-order : " + t1.root.value + ",");
       t1.preOrderTraversal(t1.root);
       System.out.println();
-           
+      
+      
       
    }  
 }
