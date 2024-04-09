@@ -46,7 +46,19 @@ class BinarySearchTree{
    pre-order traversal
    */
    public void preOrderTraversal(Node root){
-      System.out.println(root);
+   
+      if (root.left!= null) {
+         System.out.print(root.left.value + ", ");
+         }
+         if (root.left != null) {
+            inOrderTraversal(root.left);
+         }
+         if (root.right != null) {
+         System.out.print(root.right.value + ", ");
+         }
+         if (root.right != null) {
+            inOrderTraversal(root.right);
+         }
    }
 
    
@@ -57,18 +69,36 @@ class BinarySearchTree{
    public void inOrderTraversal(Node root){
       
       
-      if (root.left!= null) {
-      System.out.print(root.left.value + ", ");
-      }
-      if (root.right != null) {
-      System.out.print(root.right.value + ", ");
-      }
-      if (root.left != null) {
-         inOrderTraversal(root.left);
-      }
-      if (root.right != null) {
-         inOrderTraversal(root.right);
-      }
+      Stack<Node> stack = new Stack<Node>();
+        ArrayList<Integer> orderList = new ArrayList<Integer>();
+
+        for (Node node = root;;)
+        {
+            if (node == null)
+            {
+                if (stack.empty()) break;
+
+                node = stack.pop();
+                orderList.add(node.value);
+                node = node.right;
+            }
+            else
+            {
+                stack.push(node);
+                node = node.left;
+            }
+        }
+
+        int[] order = new int[orderList.size()];
+        for (int i = 0; i < order.length; i++)
+        {
+            order[i] = orderList.get(i);
+        }
+        
+        for (int i =0; i < order.length; i++){
+         System.out.print(order[i] + ", ");
+     }
+
    }
    
    
@@ -91,7 +121,7 @@ class BinarySearchTree{
         {
             int ctr = stackCtr.pop();
             Node node = stack.peek();
-
+            
             if (ctr == 0)
             {
                 // First visit.
@@ -101,7 +131,10 @@ class BinarySearchTree{
                 {
                     stack.push(node.left);
                     stackCtr.push(0);
+                }else{
+
                 }
+                
             }
             else if (ctr == 1)
             {
@@ -122,6 +155,7 @@ class BinarySearchTree{
                 stack.pop();
                 orderList.add(node.value);
             }
+         
         }
 
         int[] order = new int[orderList.size()];
@@ -179,8 +213,16 @@ class BinarySearchTree{
    with a largest key
    */
    public int getMax(Node root){
-	  //implement me
-     return 0;
+	  int max = 0;
+      if (max < root.value) {
+         max = root.value;
+         
+      }
+      //if (root.left);
+      
+
+
+     return max;
    }
    
    
@@ -234,11 +276,13 @@ public class TreeDemo{
       t1.insert(t1.root,22);
       
 
-      System.out.println(t1.root.value);
-      System.out.print("in-order :   " + t1.root.value + ", ");
+      
+      System.out.print("in-order :   ");
       t1.inOrderTraversal(t1.root);
       System.out.print("\npost-order : ");
       t1.postOrderTraversal(t1.root);
+      System.out.print("\npre-order : ");
+      t1.preOrderTraversal(t1.root);
       System.out.println();
            
       
