@@ -143,11 +143,22 @@ class BinarySearchTree{
    with a specific value
    */
    public boolean find(Node root, int key){
-      boolean found = false;
       
-
-
-      return found;           
+      
+      if(root == null) {
+         return false;
+      
+      }
+      if (root.value == key){
+         return true;
+      }
+      if (key < root.value){
+         return find(root.left, key);
+      } else {
+         return find(root.right, key);
+      }
+      
+             
    }
    
    
